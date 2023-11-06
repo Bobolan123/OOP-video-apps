@@ -1,5 +1,6 @@
 from tkinter import *
 from video_library import Video, list_all
+from pg_utils import PostgresDB as psdb
 
 def checkVideos():
     window = Tk()
@@ -7,6 +8,7 @@ def checkVideos():
     window.geometry('850x500')
 
     def appear_all_videos():
+        all_videos_output.delete('1.0', END)
         clicked = Label(master=window, font= 1, text='Check videos button was clicked')
         clicked.pack()
         clicked.place(x=10, y=420)
@@ -15,10 +17,17 @@ def checkVideos():
             all_videos_output.insert("1.0", video+"\n")
 
     def check_video():
+        db = psdb()
+        length_videos = len(db.select_all_videos())
         id = entry.get()
-        video = Video(id)
-        video_infor_str = video.get_video_info_by_id()  
-        video_output.insert("1.0", video_infor_str)
+        if id.isdigit() and int(id) >0 and int(id) <= length_videos:
+            video_output.delete('1.0', END)
+            error_label.config(text="")
+            video = Video(id)
+            video_infor_str = video.get_video_info_by_id()  
+            video_output.insert("1.0", video_infor_str)
+        else:
+            error_label.config(text="Invalid input")
 
     #BUTTON
     list_all_videos = Button(window, text="List All Videos", font=16, command=appear_all_videos)
@@ -27,6 +36,8 @@ def checkVideos():
     #LABEL
     enter_video_label = Label(window, text='Enter Video Number', font=14)
     enter_video_label.pack()
+    error_label = Label(window, text='')
+    error_label.pack()
 
     #ENTRY
     entry = Entry(window, width=4)
@@ -55,6 +66,8 @@ def checkVideos():
     video_output.place(x=550, y=80, width=250, height=120) 
     scrollbar1.place(x=490, y=80, height=300)  
     scrollbar2.place(x=800, y=80, height=120)  
-
+    error_label.place(x=640, y=50)  
 
     window.mainloop()
+
+checkVideos()
