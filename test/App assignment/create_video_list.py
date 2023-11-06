@@ -1,5 +1,5 @@
 from tkinter import *
-from video_library import Video, list_all
+from video_library import Video
 from pg_utils import PostgresDB as pgdb
 
 def createVideoList():

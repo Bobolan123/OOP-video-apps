@@ -70,4 +70,3 @@ def checkVideos():
 
     window.mainloop()
 
-checkVideos()
