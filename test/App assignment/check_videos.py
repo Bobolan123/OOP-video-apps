@@ -1,4 +1,5 @@
 from tkinter import *
+from PIL import Image, ImageTk
 from video_library import Video, list_all
 from pg_utils import PostgresDB as psdb
 
@@ -20,12 +21,21 @@ def checkVideos():
         db = psdb()
         length_videos = len(db.select_all_videos())
         id = entry.get()
+
         if id.isdigit() and int(id) >0 and int(id) <= length_videos:
             video_output.delete('1.0', END)
             error_label.config(text="")
             video = Video(id)
             video_infor_str = video.get_video_info_by_id()  
             video_output.insert("1.0", video_infor_str)
+            path = rf"D:\UNI COURSES\COMP1752-OOP\Self code\test\pics\vid{id}.jpg"
+            image = Image.open(path)
+
+            image.thumbnail((250, 200))
+
+            photo = ImageTk.PhotoImage(image)
+            pic.config(image=photo)
+            pic.photo = photo
         else:
             error_label.config(text="Invalid input")
 
@@ -38,6 +48,8 @@ def checkVideos():
     enter_video_label.pack()
     error_label = Label(window, text='')
     error_label.pack()
+    pic = Label(window, text='')
+    pic.pack()
 
     #ENTRY
     entry = Entry(window, width=4)
@@ -67,6 +79,8 @@ def checkVideos():
     scrollbar1.place(x=490, y=80, height=300)  
     scrollbar2.place(x=800, y=80, height=120)  
     error_label.place(x=640, y=50)  
+    pic.place(x=550, y=230)
 
     window.mainloop()
 
+checkVideos()
