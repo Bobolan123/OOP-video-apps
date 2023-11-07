@@ -1,10 +1,11 @@
 from tkinter import *
 from check_videos import checkVideos
 from create_video_list import createVideoList
+from update_video import updateVideo
+
 window = Tk()
 window.title('Video player')
 window.geometry('600x200')
-
 
 def openCheckVideo():
     checkVideos()
@@ -12,9 +13,12 @@ def openCheckVideo():
 def create_video_list():
     createVideoList()
 
+def update_video():
+    updateVideo()
+
 check_video_button = Button(window, text="Check Videos", font=16, command=openCheckVideo)
 create_video_button = Button(window, text="Create Video List", font=16, command=create_video_list)
-up_date_video_button = Button(window, text="Update Video", font=16)
+up_date_video_button = Button(window, text="Update Video", font=16, command= update_video)
 
 label = Label(master=window, font= 1, text='Select an option by clicking one of the buttons below')
 

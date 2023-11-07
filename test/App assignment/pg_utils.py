@@ -2,7 +2,7 @@
 This module contains some utilities for DB connecting and quering 
 """
 import sys
-import psycopg2 as pg
+import psycopg2 as pg	
 import configDB
 
 class PostgresDB:

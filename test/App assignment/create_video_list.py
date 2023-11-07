@@ -7,7 +7,7 @@ def createVideoList():
 
     window = Tk()
     window.title('Create video list')
-    window.geometry('500x450')
+    window.geometry('500x220')
 
     def addVideo():
         db = pgdb()
@@ -65,14 +65,13 @@ def createVideoList():
     play_list_button = Button(window, text="Play the playlist", font=font_but, command=playList)
     reset_list = Button(window, text="Reset", font=font_but, command=clear)
 
-
     enter_video_label.place(x=20, y=14)
     entry.place(x=210, y=20)
-    all_videos_output.place(x=10, y=80, width=480, height=300)  
+    all_videos_output.place(x=10, y=80, width=480, height=100)  
     check_video_button.place(x=250,y=15)
     play_list_button.place(x=350,y=15)
     reset_list.place(x=400,y=50)
-    error_label.place(x=250, y =50)
+    error_label.place(x=250,y=50)
 
     window.mainloop()
 
