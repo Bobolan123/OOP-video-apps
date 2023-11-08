@@ -38,14 +38,33 @@ def checkVideos():
             pic.photo = photo
         else:
             error_label.config(text="Invalid input")
+    
+    def check_director():
+        db = psdb()
+        director = director_entry.get()
+        all_videos_by_director = db.select_video_by_name(director)
+        if len(all_videos_by_director) != 0:
+            video_item = f"{director}:\n"
+            for row in all_videos_by_director:
+                video_item += f"{row[0]} {row[1]} {'*' * int(row[3])}\n"
+            all_videos_output.delete('1.0', END)
+            all_videos_output.insert("1.0", video_item)
+        else:
+            error_label.config(text="Invalid input")
+
 
     #BUTTON
     list_all_videos = Button(window, text="List All Videos", font=16, command=appear_all_videos)
-    check_video_button = Button(window, text="Check Video", font=16, command=check_video)
+    check_video_button = Button(window, text="Check", command=check_video)
+    check_director_button = Button(window, text="Check", command=check_director)
+    check_video_button.config(width=6, height=1)  
+    check_director_button.config(width=6, height=1)  
 
     #LABEL
     enter_video_label = Label(window, text='Enter Video Number', font=14)
     enter_video_label.pack()
+    enter_director_label = Label(window, text='Enter Director Number', font=14)
+    enter_director_label.pack()
     error_label = Label(window, text='')
     error_label.pack()
     pic = Label(window, text='')
@@ -54,6 +73,8 @@ def checkVideos():
     #ENTRY
     entry = Entry(window, width=4)
     entry.pack()
+    director_entry = Entry(window, width=4)
+    director_entry.pack()
 
     #TEXT
     all_videos_output = Text(window, font=13)
@@ -71,14 +92,17 @@ def checkVideos():
 
     #POSITION
     list_all_videos.place(x=10, y=10)
-    check_video_button.place(x=615, y=10)
+    check_video_button.place(x=615, y=15)
+    check_director_button.place(x=615, y=45)
     enter_video_label.place(x=250, y=14)
+    enter_director_label.place(x=250, y=40)
     entry.place(x=465, y=20)
+    director_entry.place(x=465, y=46,width=100)
     all_videos_output.place(x=10, y=80, width=480, height=300)  
     video_output.place(x=550, y=80, width=250, height=120) 
     scrollbar1.place(x=490, y=80, height=300)  
     scrollbar2.place(x=800, y=80, height=120)  
-    error_label.place(x=640, y=50)  
+    error_label.place(x=700, y=30)  
     pic.place(x=550, y=230)
 
     window.mainloop()

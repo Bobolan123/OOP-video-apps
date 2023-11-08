@@ -29,7 +29,7 @@ class PostgresDB:
 	def select_all_videos(self):
 		self.connectDB()
 		# Define a connection to postgresql server
-		query_string = "SELECT * FROM videos"
+		query_string = "SELECT * FROM videos ORDER BY id DESC"
 		self.cursor.execute(query_string)
 		results = self.cursor.fetchall()
 		self.close()
@@ -42,6 +42,14 @@ class PostgresDB:
 		results = self.cursor.fetchall()
 		self.close()
 		return results[0]
+	
+	def select_video_by_name(self, director):
+		self.connectDB()
+		query_string = f"SELECT * FROM videos WHERE director = '{director}'"
+		self.cursor.execute(query_string)
+		results = self.cursor.fetchall()
+		self.close()
+		return results
 
 	def update_row(self, row_tuples):
 		self.connectDB()
