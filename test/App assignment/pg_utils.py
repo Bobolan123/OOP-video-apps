@@ -19,7 +19,7 @@ class PostgresDB:
 			#Define the cursor
 			self.cursor = self.conn.cursor()
 		except Exception as e:
-			print(f"Got erros on DB connection: {e}")
+			print(f"Got errors on DB connection: {e}")
 			sys.exit()
 	
 	def close(self):

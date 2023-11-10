@@ -63,7 +63,7 @@ def checkVideos():
     #LABEL
     enter_video_label = Label(window, text='Enter Video Number', font=14)
     enter_video_label.pack()
-    enter_director_label = Label(window, text='Enter Director Number', font=14)
+    enter_director_label = Label(window, text='Enter Director', font=14)
     enter_director_label.pack()
     error_label = Label(window, text='')
     error_label.pack()
@@ -107,3 +107,5 @@ def checkVideos():
 
     window.mainloop()
 
+if __name__ == '__main__':
+    checkVideos()

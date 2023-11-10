@@ -7,17 +7,26 @@ def updateVideo():
     window.title('Update Video')
     window.geometry('500x450')
 
+    def is_float(string):
+        try:
+            # float() is a built-in function
+            float(string)
+            return True
+        except ValueError:
+            return False
+        
     def addVideo():
         db = pgdb()
         lenVideosInDB = len(db.select_all_videos())
         id = id_entry.get()
         rate = rating_entry.get()
-        if id.isdigit() and int(id) <= lenVideosInDB and int(id) >0 and float(rate) >= 0 and float(rate) <=5:
-            error_label.config(text="") 
-            video_output.delete(1.0, END) 
-            video = Video(id)
-            video_infor = getVideoInfor(video, float(rate))
-            video_output.insert("1.0", video_infor)
+        if id.isdigit() and int(id) <= lenVideosInDB and int(id) >0 and is_float(rate):
+            if float(rate) >= 0 and float(rate) <=5:
+                error_label.config(text="") 
+                video_output.delete(1.0, END) 
+                video = Video(id)
+                video_infor = getVideoInfor(video, float(rate))
+                video_output.insert("1.0", video_infor)
         else:
             error_label.config(text="Invalid input, type again") 
 
