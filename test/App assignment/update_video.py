@@ -60,4 +60,3 @@ def updateVideo():
     window.mainloop()
 
 
-updateVideo()

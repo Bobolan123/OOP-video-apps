@@ -28,18 +28,19 @@ def createVideoList():
     def checkVideoInList(id):
         for video in list_videos:
             if video.id == id:
-                return 
+                return True
 
     def getVideoNameList():
         video_name_str = ""
         for video in list_videos:
-            video_name_str += f"{video.id} {video.name}.\n"
+            video_name_str += f"{video.id} {video.name}, play count: {video.play_count}.\n"
         return video_name_str
 
     def playList():
         for video in list_videos:
-            video.play_count += 1
-            print(video.play_count)
+            video.increament_play_count()
+        all_videos_output.delete('1.0', END)
+        all_videos_output.insert("1.0", getVideoNameList())
 
     def clear():
         list_videos.clear()
@@ -76,4 +77,3 @@ def createVideoList():
 
     window.mainloop()
 
-createVideoList()
