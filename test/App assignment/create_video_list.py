@@ -27,7 +27,8 @@ def createVideoList():
 
     def checkVideoInList(id):
         for video in list_videos:
-            return video.id == id
+            if video.id == id:
+                return 
 
     def getVideoNameList():
         video_name_str = ""
@@ -75,3 +76,4 @@ def createVideoList():
 
     window.mainloop()
 
+createVideoList()

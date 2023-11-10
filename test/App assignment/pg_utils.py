@@ -53,12 +53,12 @@ class PostgresDB:
 
 	def update_row(self, row_tuples):
 		self.connectDB()
-		query_string = f"UPDATE table_name\
-						SET video_name = {row_tuples[1]},\
-							director = {row_tuples[2]},\
-							rate = {row_tuples[3]}, \
+		query_string = f"UPDATE videos\
+						SET video_name = '{row_tuples[1]}',\
+							director = '{row_tuples[2]}',\
+							rate = {row_tuples[3]},\
 							play_count={row_tuples[4]},\
-							file_path = {row_tuples[5]}\
+							file_path ='{row_tuples[5]}'\
 						WHERE id = {row_tuples[0]}"
 		self.cursor.execute(query_string)
 		self.conn.commit()

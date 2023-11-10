@@ -23,7 +23,7 @@ def updateVideo():
 
     def getVideoInfor(video, rate):
         # rate = rating_entry.get()
-        video.rate = rate
+        video.set_rating(rate)
         return f"{video.id} {video.name}\nRate: {video.rate}\nPlay count: {video.play_count}"
 
     #LABEL
@@ -60,3 +60,4 @@ def updateVideo():
     window.mainloop()
 
 
+updateVideo()
